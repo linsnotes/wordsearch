@@ -4,18 +4,18 @@
     "Collocations": ["你好吗", "你好啊"],
     "ExampleSentences": ["你好，我的朋友。"],
     "Course": "Introductory Chinese",
-    "Grade": "1",
+    "Grade": "G1",
     "Unit": "1",
-    "LessonText": "Greetings"
+    "LessonText": "A"
   },
   "学习": {
     "EnglishExplanation": "Study",
     "Collocations": ["学习方法", "学习计划"],
     "ExampleSentences": ["我在学习中文。"],
     "Course": "Basic Chinese",
-    "Grade": "2",
-    "Unit": "3",
-    "LessonText": "Study Habits"
+    "Grade": "G2",
+    "Unit": "5",
+    "LessonText": "B"
   },
   "书籍": {
     "EnglishExplanation": "Books",
@@ -24,6 +24,6 @@
     "Course": "Literature",
     "Grade": "3",
     "Unit": "5",
-    "LessonText": "Reading and Understanding"
+    "LessonText": "C"
   }
 }
