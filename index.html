@@ -2,38 +2,59 @@
 <html>
 <head>
     <title>Chinese Word Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        #result { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px; }
-        .word-info { margin-bottom: 10px; }
-        .word-info strong { font-weight: bold; }
-        input[type="text"], select, button { 
-            width: 100%; 
-            padding: 10px; 
-            box-sizing: border-box; 
-            margin-top: 10px; 
-            display: block; /* Make each element take its own line */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 10px;
+            background: #f2f2f2;
+            margin: 0;
         }
-        button { 
-            background-color: #4CAF50; /* Green */
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .search-area, .filter-area, .results-area {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
             color: white;
             border: none;
-            cursor: pointer;
+            font-size: 16px;
         }
         button:hover {
-            background-color: #45a049;
+            opacity: 0.9;
         }
-
-        /* Responsive adjustments */
-        @media (min-width: 600px) {
-            .responsive-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            input[type="text"], select, button {
-                width: 50%; /* Adjust width on larger screens */
-            }
+        #result {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .word-info {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .word-info strong {
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
