@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chinese Word Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #result { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px; }
+        .word-info { margin-bottom: 10px; }
+        .word-info strong { font-weight: bold; }
+        input[type="text"] { width: 300px; padding: 10px; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Chinese Word Lookup</h1>
+    <input type="text" id="searchInput" placeholder="Enter a Chinese word" />
+    <button onclick="searchWord()">Search</button>
+    <div id="result"></div>
+
+    <script>
+        let chineseWordsData = {};
+
+        // Fetching data from JSON file
+        // The JSON file path should be relative to the location of this HTML file on GitHub
+        fetch('wordData.json')
+            .then(response => response.json())
+            .then(data => {
+                chineseWordsData = data;
+            })
+            .catch(error => {
+                console.error("Error fetching the JSON data: ", error);
+            });
+
+        function searchWord() {
+            const word = document.getElementById('searchInput').value;
+            const resultDiv = document.getElementById('result');
+
+            if (chineseWordsData[word]) {
+                const wordData = chineseWordsData[word];
+                let resultHtml = `<h2>Results for: ${word}</h2>`;
+
+                // Constructing HTML string with word data
+                resultHtml += formatData("English Explanation", wordData.EnglishExplanation);
+                resultHtml += formatData("Collocations", wordData.Collocations.join(', '));
+                resultHtml += formatData("Example Sentences", wordData.ExampleSentences.join('; '));
+                // ... append other data similarly
+
+                resultDiv.innerHTML = resultHtml;
+            } else {
+                resultDiv.innerHTML = `<p>No results found for: ${word}</p>`;
+            }
+        }
+
+        function formatData(title, data) {
+            return `<div class="word-info"><strong>${title}:</strong> ${data}</div>`;
+        }
+    </script>
+</body>
+</html>
