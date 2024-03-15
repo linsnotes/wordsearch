@@ -3,8 +3,8 @@
     "EnglishExplanation": "Hello",
     "Collocations": ["你好吗", "你好啊"],
     "ExampleSentences": ["你好，我的朋友。"],
-    "Course": "Introductory Chinese",
-    "Grade": "G1",
+    "Course": "G1",
+    "Grade": "1",
     "Unit": "1",
     "LessonText": "A"
   },
@@ -12,8 +12,8 @@
     "EnglishExplanation": "Study",
     "Collocations": ["学习方法", "学习计划"],
     "ExampleSentences": ["我在学习中文。"],
-    "Course": "Basic Chinese",
-    "Grade": "G2",
+    "Course": "G2",
+    "Grade": "2",
     "Unit": "5",
     "LessonText": "B"
   },
@@ -21,7 +21,7 @@
     "EnglishExplanation": "Books",
     "Collocations": ["图书籍", "阅读书籍"],
     "ExampleSentences": ["这些书籍非常有用。"],
-    "Course": "Literature",
+    "Course": "HCL",
     "Grade": "3",
     "Unit": "5",
     "LessonText": "C"
