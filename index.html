@@ -7,20 +7,39 @@
         #result { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px; }
         .word-info { margin-bottom: 10px; }
         .word-info strong { font-weight: bold; }
-        input[type="text"], select { width: 100%; padding: 10px; box-sizing: border-box; margin-top: 10px; }
-        button { padding: 10px 20px; width: 100%; margin-top: 10px; box-sizing: border-box; }
+        input[type="text"], select, button { 
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            margin-top: 10px; 
+            display: block; /* Make each element take its own line */
+        }
+        button { 
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
 
         /* Responsive adjustments */
         @media (min-width: 600px) {
+            .responsive-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
             input[type="text"], select, button {
-                width: auto; /* Revert to default width on larger screens */
-                margin-top: 0;
+                width: 50%; /* Adjust width on larger screens */
             }
         }
     </style>
 </head>
 <body>
     <h1>Chinese Word Lookup</h1>
+    <div class="responsive-container">
     <button onclick="refetchData()">Refetch Data</button>
     <input type="text" id="searchInput" placeholder="Enter a Chinese word" />
     <button onclick="searchWord()">Search</button>
@@ -63,6 +82,7 @@
         <option value="J">J</option>
         <option value="K">K</option>
     </select>
+    </div>
     <div id="result"></div>
 
     <script>
