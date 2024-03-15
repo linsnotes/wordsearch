@@ -43,6 +43,10 @@
                 resultHtml += formatData("English Explanation", wordData.EnglishExplanation);
                 resultHtml += formatData("Collocations", wordData.Collocations.join(', '));
                 resultHtml += formatData("Example Sentences", wordData.ExampleSentences.join('; '));
+                resultHtml += formatData("Course", wordData.Course);
+                resultHtml += formatData("Grade", wordData.Grade);
+                resultHtml += formatData("Unit", wordData.Unit);
+                resultHtml += formatData("Lesson Text", wordData.LessonText);
                 // ... append other data similarly
 
                 resultDiv.innerHTML = resultHtml;
