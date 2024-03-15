@@ -59,12 +59,15 @@
     </style>
 </head>
 <body>
+    
+<div class="container">
     <h1>Chinese Word Lookup</h1>
-    <div class="responsive-container">
-    <button onclick="refetchData()">Refetch Data</button>
-    <input type="text" id="searchInput" placeholder="Enter a Chinese word" />
-    <button onclick="searchWord()">Search</button>
-
+    <div class="search-area">
+        <input type="text" id="searchInput" placeholder="Enter a Chinese word">
+        <button onclick="searchWord()">Search</button>
+        <button onclick="refetchData()">Refetch Data</button>
+    </div>
+    <div class="filter-area">
     <!-- Filter Dropdowns -->
     <select id="filterCourse" onchange="filterResults()">
         <option value="">Filter by Course</option>
@@ -104,8 +107,11 @@
         <option value="K">K</option>
     </select>
     </div>
-    <div id="result"></div>
-
+    
+    <div class="results-area" id="result">
+            <!-- Results will be displayed here -->
+    </div>
+</div>
     <script>
         let chineseWordsData = {};
 
