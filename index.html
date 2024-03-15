@@ -98,6 +98,13 @@
                 resultDiv.innerHTML = `<p>No results found for: ${word}</p>`;
             }
         }
+
+To modify the filterResults function for reverse search functionality as you've described, we need to adjust the function to filter based on the selected criteria (Course, Grade, Unit, LessonText) and return the matching words.
+
+Here's how you can rewrite the filterResults function for this purpose:
+
+javascript
+Copy code
 function filterResults() {
     const courseFilter = document.getElementById('filterCourse').value;
     const gradeFilter = document.getElementById('filterGrade').value;
@@ -105,42 +112,21 @@ function filterResults() {
     const lessonTextFilter = document.getElementById('filterLessonText').value;
     const resultDiv = document.getElementById('result');
 
-    let filteredData = {};
-
-    // Filtering data layer by layer
-    for (let key in chineseWordsData) {
-        let data = chineseWordsData[key];
-
-        if (courseFilter && data.Course !== courseFilter) continue;
-        if (gradeFilter && data.Grade !== gradeFilter) continue;
-        if (unitFilter && data.Unit !== unitFilter) continue;
-        if (lessonTextFilter && data.LessonText !== lessonTextFilter) continue;
-
-        // If data passes all filters, add it to filteredData
-        filteredData[key] = data;
-    }
-
-    displayResults(filteredData);
-}
-
-function displayResults(data) {
-    const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = ''; // Clear previous results
 
-    for (let key in data) {
-        let wordData = data[key];
-        // Formatting and adding each result
-        resultDiv.innerHTML += `<h2>${key}</h2>` +
-            formatData("English Explanation", wordData.EnglishExplanation) +
-            formatData("Collocations", wordData.Collocations.join(', ')) +
-            formatData("Example Sentences", wordData.ExampleSentences.join('; ')) +
-            formatData("Course", wordData.Course) +
-            formatData("Grade", wordData.Grade) +
-            formatData("Unit", wordData.Unit) +
-            formatData("Lesson Text", wordData.LessonText);
-    }
+    let matchedWords = Object.keys(chineseWordsData).filter(word => {
+        let data = chineseWordsData[word];
+        return (!courseFilter || data.Course === courseFilter) &&
+               (!gradeFilter || data.Grade === gradeFilter) &&
+               (!unitFilter || data.Unit === unitFilter) &&
+               (!lessonTextFilter || data.LessonText === lessonTextFilter);
+    });
 
-    if (resultDiv.innerHTML === '') {
+    if (matchedWords.length > 0) {
+        matchedWords.forEach(word => {
+            resultDiv.innerHTML += `<p>${word}</p>`;
+        });
+    } else {
         resultDiv.innerHTML = '<p>No results found.</p>';
     }
 }
