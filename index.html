@@ -3,12 +3,52 @@
 <head>
     <title>Chinese Word Search</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        #result { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px; }
-        .word-info { margin-bottom: 10px; }
-        .word-info strong { font-weight: bold; }
-        input[type="text"] { width: 300px; padding: 10px; }
-        button { padding: 10px 20px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            margin: 0; 
+        }
+        #result { 
+            margin-top: 20px; 
+            border-top: 1px solid #ccc; 
+            padding-top: 20px; 
+        }
+        .word-info { 
+            margin-bottom: 10px; 
+        }
+        .word-info strong { 
+            font-weight: bold; 
+        }
+        input[type="text"], select {
+            width: 100%; 
+            padding: 10px; 
+            box-sizing: border-box; /* Fixes padding issue */
+        }
+        button { 
+            padding: 10px 20px; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 600px) {
+            input[type="text"], select {
+                width: auto; 
+            }
+            button {
+                width: auto;
+            }
+            .form-group {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            .form-group > * {
+                flex: 1;
+                min-width: 120px;
+                margin: 5px;
+            }
+        }
     </style>
 </head>
 <body>
