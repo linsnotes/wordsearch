@@ -18,62 +18,59 @@
     <button onclick="searchWord()">Search</button>
 
     <!-- Filter Dropdowns -->
-<select id="filterCourse" onchange="filterResults()">
-    <option value="">Filter by Course</option>
-    <option value="G1">G1</option>
-    <option value="G2">G2</option>
-    <option value="G3">G3</option>
-    <option value="HCL">HCL</option>
-</select>
-<select id="filterGrade" onchange="filterResults()">
-    <option value="">Filter by Grade</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-</select>
-<select id="filterUnit" onchange="filterResults()">
-    <option value="">Filter by Unit</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-</select>
-<select id="filterLessonText" onchange="filterResults()">
-    <option value="">Filter by Lesson Text</option>
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
-    <option value="D">D</option>
-    <option value="E">E</option>
-    <option value="F">F</option>
-    <option value="G">G</option>
-    <option value="H">H</option>
-    <option value="I">I</option>
-    <option value="J">J</option>
-    <option value="K">K</option>
-</select>
-
+    <select id="filterCourse" onchange="filterResults()">
+        <option value="">Filter by Course</option>
+        <option value="G1">G1</option>
+        <option value="G2">G2</option>
+        <option value="G3">G3</option>
+        <option value="HCL">HCL</option>
+    </select>
+    <select id="filterGrade" onchange="filterResults()">
+        <option value="">Filter by Grade</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <select id="filterUnit" onchange="filterResults()">
+        <option value="">Filter by Unit</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <select id="filterLessonText" onchange="filterResults()">
+        <option value="">Filter by Lesson Text</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+        <option value="G">G</option>
+        <option value="H">H</option>
+        <option value="I">I</option>
+        <option value="J">J</option>
+        <option value="K">K</option>
+    </select>
     <button onclick="filterResults()">Filter</button>
-
-    
     <div id="result"></div>
 
     <script>
         let chineseWordsData = {};
 
-        // Fetching data from JSON file
-        // The JSON file path should be relative to the location of this HTML file on GitHub
-        fetch('wordData.json')
-            .then(response => response.json())
-            .then(data => {
-                chineseWordsData = data;
-            })
-            .catch(error => {
-                console.error("Error fetching the JSON data: ", error);
-            });
+        function fetchData() {
+            fetch('wordData.json')
+                .then(response => response.json())
+                .then(data => {
+                    chineseWordsData = data;
+                })
+                .catch(error => {
+                    console.error("Error fetching the JSON data: ", error);
+                });
+        }
 
         function searchWord() {
             const word = document.getElementById('searchInput').value;
@@ -83,7 +80,6 @@
                 const wordData = chineseWordsData[word];
                 let resultHtml = `<h2>Results for: ${word}</h2>`;
 
-                // Constructing HTML string with word data
                 resultHtml += formatData("English Explanation", wordData.EnglishExplanation);
                 resultHtml += formatData("Collocations", wordData.Collocations.join(', '));
                 resultHtml += formatData("Example Sentences", wordData.ExampleSentences.join('; '));
@@ -91,7 +87,6 @@
                 resultHtml += formatData("Grade", wordData.Grade);
                 resultHtml += formatData("Unit", wordData.Unit);
                 resultHtml += formatData("Lesson Text", wordData.LessonText);
-                // ... append other data similarly
 
                 resultDiv.innerHTML = resultHtml;
             } else {
@@ -99,55 +94,42 @@
             }
         }
 
-To modify the filterResults function for reverse search functionality as you've described, we need to adjust the function to filter based on the selected criteria (Course, Grade, Unit, LessonText) and return the matching words.
-
-Here's how you can rewrite the filterResults function for this purpose:
-
-javascript
-Copy code
-function filterResults() {
-    const courseFilter = document.getElementById('filterCourse').value;
-    const gradeFilter = document.getElementById('filterGrade').value;
-    const unitFilter = document.getElementById('filterUnit').value;
-    const lessonTextFilter = document.getElementById('filterLessonText').value;
-    const resultDiv = document.getElementById('result');
-
-    resultDiv.innerHTML = ''; // Clear previous results
-
-    let matchedWords = Object.keys(chineseWordsData).filter(word => {
-        let data = chineseWordsData[word];
-        return (!courseFilter || data.Course === courseFilter) &&
-               (!gradeFilter || data.Grade === gradeFilter) &&
-               (!unitFilter || data.Unit === unitFilter) &&
-               (!lessonTextFilter || data.LessonText === lessonTextFilter);
-    });
-
-    if (matchedWords.length > 0) {
-        matchedWords.forEach(word => {
-            resultDiv.innerHTML += `<p>${word}</p>`;
-        });
-    } else {
-        resultDiv.innerHTML = '<p>No results found.</p>';
-    }
-}
         function formatData(title, data) {
             return `<div class="word-info"><strong>${title}:</strong> ${data}</div>`;
         }
 
-        function refetchData() {
-    fetch('wordData.json')
-        .then(response => response.json())
-        .then(data => {
-            chineseWordsData = data;
-            console.log("Data successfully refetched.");
-            alert("Data has been updated."); // Notifies the user
-        })
-        .catch(error => {
-            console.error("Error refetching the JSON data: ", error);
-            alert("Failed to refetch data."); // Informs the user in case of error
-        });
-}
+        function filterResults() {
+            const courseFilter = document.getElementById('filterCourse').value;
+            const gradeFilter = document.getElementById('filterGrade').value;
+            const unitFilter = document.getElementById('filterUnit').value;
+            const lessonTextFilter = document.getElementById('filterLessonText').value;
+            const resultDiv = document.getElementById('result');
 
+            resultDiv.innerHTML = '';
+
+            let matchedWords = Object.keys(chineseWordsData).filter(word => {
+                let data = chineseWordsData[word];
+                return (!courseFilter || data.Course === courseFilter) &&
+                       (!gradeFilter || data.Grade === gradeFilter) &&
+                       (!unitFilter || data.Unit === unitFilter) &&
+                       (!lessonTextFilter || data.LessonText === lessonTextFilter);
+            });
+
+            if (matchedWords.length > 0) {
+                matchedWords.forEach(word => {
+                    resultDiv.innerHTML += `<p>${word}</p>`;
+                });
+            } else {
+                resultDiv.innerHTML = '<p>No results found.</p>';
+            }
+        }
+
+        function refetchData() {
+            fetchData();
+            alert("Data has been updated.");
+        }
+
+        fetchData();
     </script>
 </body>
 </html>
