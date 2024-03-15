@@ -99,38 +99,38 @@
             }
         }
 // New function to filter results
-        function filterResults() {
-            const courseFilter = document.getElementById('filterCourse').value;
-            const gradeFilter = document.getElementById('filterGrade').value;
-            const unitFilter = document.getElementById('filterUnit').value;
-            const lessonTextFilter = document.getElementById('filterLessonText').value;
-            const resultDiv = document.getElementById('result');
+function filterResults() {
+    const courseFilter = document.getElementById('filterCourse').value;
+    const gradeFilter = document.getElementById('filterGrade').value;
+    const unitFilter = document.getElementById('filterUnit').value;
+    const lessonTextFilter = document.getElementById('filterLessonText').value;
+    const resultDiv = document.getElementById('result');
+    
+    resultDiv.innerHTML = ''; // Clear previous results
+
+    for (let key in chineseWordsData) {
+        let data = chineseWordsData[key];
+        if ((courseFilter !== '' && data.Course === courseFilter) ||
+            (gradeFilter !== '' && data.Grade === gradeFilter) ||
+            (unitFilter !== '' && data.Unit === unitFilter) ||
+            (lessonTextFilter !== '' && data.LessonText === lessonTextFilter)) {
             
-            resultDiv.innerHTML = ''; // Clear previous results
-
-            for (let key in chineseWordsData) {
-                let data = chineseWordsData[key];
-                if ((courseFilter === '' || data.Course === courseFilter) &&
-                    (gradeFilter === '' || data.Grade === gradeFilter) &&
-                    (unitFilter === '' || data.Unit === unitFilter) &&
-                    (lessonTextFilter === '' || data.LessonText === lessonTextFilter)) {
-                    
-                    // Formatting and adding each result
-                    resultDiv.innerHTML += `<h2>${key}</h2>` +
-                        formatData("English Explanation", data.EnglishExplanation) +
-                        formatData("Collocations", data.Collocations.join(', ')) +
-                        formatData("Example Sentences", data.ExampleSentences.join('; ')) +
-                        formatData("Course", data.Course) +
-                        formatData("Grade", data.Grade) +
-                        formatData("Unit", data.Unit) +
-                        formatData("Lesson Text", data.LessonText);
-                }
-            }
-
-            if (resultDiv.innerHTML === '') {
-                resultDiv.innerHTML = '<p>No results found.</p>';
-            }
+            // Formatting and adding each result
+            resultDiv.innerHTML += `<h2>${key}</h2>` +
+                formatData("English Explanation", data.EnglishExplanation) +
+                formatData("Collocations", data.Collocations.join(', ')) +
+                formatData("Example Sentences", data.ExampleSentences.join('; ')) +
+                formatData("Course", data.Course) +
+                formatData("Grade", data.Grade) +
+                formatData("Unit", data.Unit) +
+                formatData("Lesson Text", data.LessonText);
         }
+    }
+
+    if (resultDiv.innerHTML === '') {
+        resultDiv.innerHTML = '<p>No results found.</p>';
+    }
+}
         function formatData(title, data) {
             return `<div class="word-info"><strong>${title}:</strong> ${data}</div>`;
         }
